@@ -32,6 +32,7 @@ func (cs *CustomState[EventType]) SetMutator(mutator state.Mutator) {
 func (cs *CustomState[EventType]) StateName() string {
 	return cs.name
 }
+
 func (cs *CustomState[EventType]) Apply(data []byte) (any, error) {
 	var evnet EventType
 	if err := state.UnmarshalEvent(data, evnet); err != nil {
