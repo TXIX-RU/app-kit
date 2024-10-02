@@ -35,9 +35,11 @@ func (cs *CustomState[EventType]) StateName() string {
 
 func (cs *CustomState[EventType]) Apply(data []byte) (any, error) {
 	var evnet EventType
-	if err := state.UnmarshalEvent(data, evnet); err != nil {
+
+	if err := state.UnmarshalEvent(data, &evnet); err != nil {
 		return nothing{}, err
 	}
+	// fmt.Printf("\n>>>%s\n\n%+v\n", string(data), evnet)
 	err := cs.state.Apply(evnet)
 	if err != nil {
 		return nothing{}, err
